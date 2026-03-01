@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace kaloian_37_b.Model
 {
@@ -21,13 +22,19 @@ namespace kaloian_37_b.Model
         private string _names = string.Empty;
         private string _password = string.Empty;
         private string _email = string.Empty;
+        private string _facNum = string.Empty;
         private string _role = string.Empty;
         private int _FailedLA = 0;
 
         public string Names { get { return _names; } set { _names = value;  } }
         public string Role { get { return _role; } set { _role = value; } }
+        public string FacultityNumber { get { return _facNum; } set { _facNum = value; } }
         public string Email { get { return _email; } set { _email = value; } }
-        public string Password { get { return _password; } set { _password = value; } }
+        public string Password
+        {
+            get { return Decript(_password); }   
+            set { _password = Encript(value); } 
+        }
         public int FailedLoginAttempts { get { return _FailedLA; } set { _FailedLA = value; } }
 
         public bool ISAdmin
@@ -40,14 +47,39 @@ namespace kaloian_37_b.Model
             get { return FailedLoginAttempts > 5; }
         }
 
-        public User(string names, string password, string email, string role)
+        public string Encript(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            char[] arr = text.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+
+        public string Decript(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            // reverse пак връща оригинала
+            char[] arr = text.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+
+        public User(string names, string password, string email, string role, string fNum)
         {
             this.Names = names ?? string.Empty;
-            this.Password = password ?? string.Empty;
+            this.Password = password ;
             this.Email = email ?? string.Empty;
             this.Role = role ?? string.Empty;
+            this.FacultityNumber = fNum ?? string.Empty;
             this.FailedLoginAttempts = 0;
         }
+
+
+
     }
 
 }

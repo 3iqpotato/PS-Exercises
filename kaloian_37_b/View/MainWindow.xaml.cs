@@ -23,17 +23,21 @@ namespace kaloian_37_b.View
         public void DisplayUser()
         {
             TextBlock textBlockUser = new TextBlock();
-            textBlockUser.Text = $"WELCOME\r\nUser: {UserNames}\r\n" + $"Role: {Role}\r\n";
+            textBlockUser.Text = $"WELCOME\r\nUser: {UserNames}\r\n" + $"Role: {Role}\r\n" + $"Email: {UserEmail}\r\n";
             this.Content = textBlockUser;
         }
 
         public MainWindow(UserViewModel ViewModel)
         {
-            _viewModel = ViewModel;
             InitializeComponent();
+            _viewModel = ViewModel;
+
 
         }
-
+        public string UserEmail
+        {
+            get { return _viewModel.Email ; }
+        }
         public string UserNames
         {
             get { return _viewModel.Name; }
