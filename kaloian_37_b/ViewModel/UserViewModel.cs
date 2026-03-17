@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace kaloian_37_b.ViewModel
 {
-    internal class UserViewModel
+    public class UserViewModel
 
     {
         private Model.User _user;
@@ -17,7 +17,7 @@ namespace kaloian_37_b.ViewModel
             _user = user;
         }
         public string Name { get { return _user.Names; } set { _user.Names = value; } }
-        public string Email { get { return _user.Email[0] + "*****@*****.***"; } set { _user.Names = value; } }
+        public string Email { get { return _user.Email[0] + "*****@*****.***"; } set { _user.Email = value; } }
         public string password { get { return _user.Password; } }
 
         public string IsAdmin { get { return _user.ISAdmin ? "ADMIN" : "No"; } }

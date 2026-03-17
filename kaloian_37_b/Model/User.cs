@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kaloian_37_b.Others;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +18,21 @@ namespace kaloian_37_b.Model
     - Keep property names and accessors as in original code.
     */
 
-    internal class User
+    public class User
     {
         private string _names = string.Empty;
         private string _password = string.Empty;
         private string _email = string.Empty;
         private string _facNum = string.Empty;
-        private string _role = string.Empty;
+        private UserRolesEnum _role;
         private int _FailedLA = 0;
 
         public string Names { get { return _names; } set { _names = value;  } }
-        public string Role { get { return _role; } set { _role = value; } }
+        public UserRolesEnum Role
+        {
+            get { return _role; }
+            set { _role = value; }
+        }
         public string FacultityNumber { get { return _facNum; } set { _facNum = value; } }
         public string Email { get { return _email; } set { _email = value; } }
         public string Password
@@ -39,7 +44,7 @@ namespace kaloian_37_b.Model
 
         public bool ISAdmin
         {
-            get { return Role.ToUpper() == "ADMIN"; }
+            get { return Role == UserRolesEnum.ADMIN; }
         }
 
         public bool ISBlocked
@@ -68,12 +73,12 @@ namespace kaloian_37_b.Model
             return new string(arr);
         }
 
-        public User(string names, string password, string email, string role, string fNum)
+        public User(string names, string password, string email, UserRolesEnum role, string fNum)
         {
             this.Names = names ?? string.Empty;
             this.Password = password ;
             this.Email = email ?? string.Empty;
-            this.Role = role ?? string.Empty;
+            this.Role = role;
             this.FacultityNumber = fNum ?? string.Empty;
             this.FailedLoginAttempts = 0;
         }

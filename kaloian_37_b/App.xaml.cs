@@ -1,4 +1,5 @@
 ﻿using kaloian_37_b.Model;
+using kaloian_37_b.Others;
 using kaloian_37_b.ViewModel;
 using System.Configuration;
 using System.Data;
@@ -13,7 +14,7 @@ namespace kaloian_37_b
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            User user1 = new User("Ivan", "somepasswordtotest", "IvanIvanov@gmail.com", "Admin", "121223188");
+            User user1 = new User("Ivan", "somepasswordtotest", "KvanIvanov@gmail.com", UserRolesEnum.ADMIN, "121223188");
             UserViewModel userViewModel1 = new UserViewModel(user1);
             View.MainWindow mainWindow1 = new View.MainWindow(userViewModel1);
             mainWindow1.DisplayUser();

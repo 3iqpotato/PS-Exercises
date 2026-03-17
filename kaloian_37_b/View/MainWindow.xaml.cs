@@ -1,43 +1,39 @@
 ﻿using kaloian_37_b.ViewModel;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace kaloian_37_b.View
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    internal partial class MainWindow : Window
+    public partial class MainWindow : Window
     {
         private UserViewModel _viewModel;
+
+        public MainWindow(UserViewModel viewModel)
+        {
+            InitializeComponent();
+            _viewModel = viewModel;
+        }
 
         public void DisplayUser()
         {
             TextBlock textBlockUser = new TextBlock();
-            textBlockUser.Text = $"WELCOME\r\nUser: {UserNames}\r\n" + $"Role: {Role}\r\n" + $"Email: {UserEmail}\r\n";
+            textBlockUser.Text =
+                $"WELCOME\r\nUser: {UserNames}\r\nRole: {Role}\r\nEmail: {UserEmail}\r\n";
+
             this.Content = textBlockUser;
         }
 
-        public MainWindow(UserViewModel ViewModel)
+        public void DisplayError()
         {
-            InitializeComponent();
-            _viewModel = ViewModel;
-
-
+            throw new Exception("Test logger works");
         }
+
         public string UserEmail
         {
-            get { return _viewModel.Email ; }
+            get { return _viewModel.Email; }
         }
+
         public string UserNames
         {
             get { return _viewModel.Name; }
@@ -47,5 +43,5 @@ namespace kaloian_37_b.View
         {
             get { return _viewModel.IsAdmin; }
         }
-    } 
+    }
 }
